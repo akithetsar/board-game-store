@@ -9,4 +9,8 @@ import { Footer } from './components/footer/footer';
   imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html'
 })
-export class App {}
+export class App {
+  ngOnInit() {
+    localStorage.setItem('lang', 'sr'); // default language is Serbian
+  }
+}
