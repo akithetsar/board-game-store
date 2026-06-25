@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { GameModel } from '../../models/games';
 import { Game } from '../../services/game';
+import { User } from '../../models/user';
+import { Cart } from '../../models/Cart';
 
 @Component({
   selector: 'app-catalog',
@@ -13,11 +15,13 @@ import { Game } from '../../services/game';
   styleUrls: ['./catalog.css'],
 })
 export class Catalog {
+
+  loggedUser: User | null = null;
   games: GameModel[] = [];
   selectedGroup: 'All' | 'Family' | 'Strategy' | 'Party' = 'All';
   private gameService = inject(Game);
   lang = 'sr';
-   groupLabels = {
+  groupLabels = {
     sr: {
       Details: 'Detalji',
       AddToCart: 'Dodaj u korpu',
@@ -39,6 +43,11 @@ export class Catalog {
 
 
   ngOnInit() {
+    const userData = localStorage.getItem('loggedUser');
+
+    if (userData) {
+      this.loggedUser = JSON.parse(userData);
+    }
     this.games = this.gameService.getGames();
     this.lang = localStorage.getItem('lang') || 'sr';
     this.lang = 'en'
@@ -66,7 +75,30 @@ export class Catalog {
     return this.games.filter(x => x.group.en === this.selectedGroup);
   }
 
-  get t(){
+  get t() {
     return this.groupLabels[this.lang === 'en' ? 'en' : 'sr'];
+  }
+
+  addToCart(g: GameModel) {
+    if (!this.loggedUser) {
+
+      return;
+    }
+    if (!this.loggedUser.cart) {
+      this.loggedUser.cart = new Cart();
+    }
+    this.loggedUser.cart.items.push(g);
+
+    const regisretedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    for (let i = 0; i < regisretedUsers.length; i++) {
+      if (regisretedUsers[i].username === this.loggedUser.username) {
+        regisretedUsers[i].cart = this.loggedUser.cart;
+        break;
+      }
+    }
+
+    localStorage.setItem('registeredUsers', JSON.stringify(regisretedUsers));
+    localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+
   }
 }
