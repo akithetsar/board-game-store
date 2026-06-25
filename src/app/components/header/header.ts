@@ -44,9 +44,6 @@ export class Header implements OnInit {
   setLang(lang: 'sr' | 'en') {
     this.lang = lang;
     localStorage.setItem('lang', lang);
-    // Reload is the simplest way to re-render all translated text
-    // in a uni project without a full translation service
-    window.location.reload();
   }
 
   logout() {
