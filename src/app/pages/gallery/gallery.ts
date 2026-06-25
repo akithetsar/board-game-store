@@ -25,7 +25,6 @@ export class Gallery {
   images = [
     '/assets/images/store/store1.jpg',
     '/assets/images/store/store2.png',
-    // dodaj više putanja ili prebaci da čitaš iz servisa
   ];
 
   ngOnInit() {

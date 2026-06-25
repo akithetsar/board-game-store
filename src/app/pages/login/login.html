@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="card p-4 mx-auto shadow" style="max-width: 500px;">
+
+    <div class="btn-group w-100 mb-4">
+      <button class="btn" [class.btn-primary]="isLogin" [class.btn-outline-primary]="!isLogin"
+        (click)="switchMode(true)">
+        {{ t.login }}
+      </button>
+
+      <button class="btn" [class.btn-success]="!isLogin" [class.btn-outline-success]="isLogin"
+        (click)="switchMode(false)">
+        {{ t.register }}
+      </button>
+    </div>
+
+    <div *ngIf="isLogin">
+      <h3 class="text-center mb-4">{{ t.login }}</h3>
+
+      <div class="text-center">
+        <span class="text-danger">{{ loginError }}</span>
+      </div>
+      <input class="form-control mb-3" placeholder="{{ t.username }}" [(ngModel)]="loginData.username">
+
+      <input type="password" class="form-control mb-3" placeholder="{{ t.password }}" [(ngModel)]="loginData.password">
+
+      <button class="btn btn-primary w-100" (click)="login()">
+        {{ t.login }}
+      </button>
+    </div>
+
+    <div *ngIf="!isLogin">
+      <h3 class="text-center mb-4">{{ t.register }}</h3>
+      <div class="text-center">
+        <span class="text-danger">{{ registerError }}</span>
+      </div>
+
+      <input class="form-control mb-3" placeholder="{{ t.username }}" [(ngModel)]="registerData.username">
+
+      <input class="form-control mb-3" placeholder="{{ t.name }}" [(ngModel)]="registerData.name">
+
+      <input class="form-control mb-3" placeholder="{{ t.surname }}" [(ngModel)]="registerData.surname">
+
+      <input type="password" class="form-control mb-3" placeholder="{{ t.password }}" [(ngModel)]="registerData.password">
+
+      <button class="btn btn-success w-100" (click)="register()">
+        {{ t.register }}
+      </button>
+    </div>
+
+  </div>
+</div>
