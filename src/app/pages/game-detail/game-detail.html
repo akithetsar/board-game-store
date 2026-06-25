@@ -15,7 +15,7 @@
 
         <img
           *ngIf="selectedImage"
-          [src]="'assets/images/' + selectedImage"
+          [src]="'assets/images/games/' + selectedImage"
           [alt]="game.name.sr"
           class="img-fluid rounded shadow-sm border mb-3 w-100">
 
@@ -25,7 +25,7 @@
 
           <img
             *ngFor="let img of game.images"
-            [src]="'assets/images/' + img"
+            [src]="'assets/images/games/' + img"
             [alt]="game.name.sr"
             (click)="selectImage(img)"
             class="border rounded"
@@ -105,7 +105,8 @@
         </div>
 
         <button
-          class="btn btn-warning btn-lg">
+          class="btn btn-warning btn-lg"
+          (click)="addToCart()">
           🛒 Dodaj u korpu
         </button>
 
