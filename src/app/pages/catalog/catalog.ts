@@ -26,7 +26,7 @@ export class Catalog implements OnInit {
   lang: 'sr' | 'en' = 'sr';
 
   private gameService = inject(Game);
-  private route       = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
 
   // ── Labels ──────────────────────────────────────────
   labels = {
@@ -44,10 +44,10 @@ export class Catalog implements OnInit {
     }
   };
 
-  categories: { key: Exclude<Group,'All'>; icon: string; sr: string; en: string }[] = [
-    { key: 'Family',   icon: '👨‍👩‍👧', sr: 'Porodične igre', en: 'Family Games'   },
-    { key: 'Strategy', icon: '♟️',      sr: 'Strateške igre', en: 'Strategy Games' },
-    { key: 'Party',    icon: '🎉',      sr: 'Zabavne igre',   en: 'Party Games'    },
+  categories: { key: Exclude<Group, 'All'>; sr: string; en: string }[] = [
+    { key: 'Family', sr: 'Porodične igre', en: 'Family Games' },
+    { key: 'Strategy', sr: 'Strateške igre', en: 'Strategy Games' },
+    { key: 'Party', sr: 'Zabavne igre', en: 'Party Games' },
   ];
 
   get t() { return this.labels[this.lang]; }
@@ -71,7 +71,7 @@ export class Catalog implements OnInit {
 
   // ── Helpers ──────────────────────────────────────────
   displayName(g: GameModel) { return this.lang === 'en' ? g.name.en ?? g.name.sr : g.name.sr; }
-  displayGroup(g: GameModel){ return this.lang === 'en' ? g.group.en ?? g.group.sr : g.group.sr; }
+  displayGroup(g: GameModel) { return this.lang === 'en' ? g.group.en ?? g.group.sr : g.group.sr; }
 
   countFor(group: string): number {
     return this.games.filter(g => g.group.en === group).length;

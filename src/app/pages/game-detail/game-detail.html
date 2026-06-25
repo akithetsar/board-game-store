@@ -3,7 +3,7 @@
   <a
     routerLink="/catalog"
     class="btn btn-outline-secondary mb-4">
-    ← Nazad na katalog
+    ← {{t.back}}
   </a>
 
   <div *ngIf="game; else notFound">
@@ -16,7 +16,7 @@
         <img
           *ngIf="selectedImage"
           [src]="'assets/images/games/' + selectedImage"
-          [alt]="game.name.sr"
+          [alt]="game.name[lang]"
           class="img-fluid rounded shadow-sm border mb-3 w-100">
 
         <div
@@ -26,7 +26,7 @@
           <img
             *ngFor="let img of game.images"
             [src]="'assets/images/games/' + img"
-            [alt]="game.name.sr"
+            [alt]="game.name[lang]"
             (click)="selectImage(img)"
             class="border rounded"
             style="
@@ -43,11 +43,11 @@
       <div class="col-lg-6">
 
         <span class="badge bg-warning text-dark fs-6 mb-2">
-          {{ game.group.sr }}
+          {{ game.group[lang] }}
         </span>
 
         <h1 class="fw-bold mb-3">
-          {{ game.name.sr }}
+          {{ game.name[lang] }}
         </h1>
 
         <h2 class="text-success mb-4">
@@ -59,8 +59,8 @@
           <div class="col-4">
             <div class="card text-center h-100">
               <div class="card-body">
-                <div class="fs-3">👥</div>
-                <small class="text-muted">Igrača</small>
+                <div class="fs-3"></div>
+                <small class="text-muted">{{t.players}}</small>
                 <div class="fw-semibold">
                   {{ game.players }}
                 </div>
@@ -71,8 +71,8 @@
           <div class="col-4">
             <div class="card text-center h-100">
               <div class="card-body">
-                <div class="fs-3">🎂</div>
-                <small class="text-muted">Uzrast</small>
+                <div class="fs-3"></div>
+                <small class="text-muted">{{t.age}}</small>
                 <div class="fw-semibold">
                   {{ game.age }}
                 </div>
@@ -83,8 +83,8 @@
           <div class="col-4">
             <div class="card text-center h-100">
               <div class="card-body">
-                <div class="fs-3">⏱️</div>
-                <small class="text-muted">Trajanje</small>
+                <div class="fs-3"></div>
+                <small class="text-muted">{{t.duration}}</small>
                 <div class="fw-semibold">
                   {{ game.duration }}
                 </div>
@@ -96,10 +96,10 @@
 
         <div class="card mb-4">
           <div class="card-body">
-            <h4>Opis igre</h4>
+            <h4>{{t.description}}</h4>
 
             <p class="mb-0">
-              {{ game.description?.sr }}
+              {{ game.description?.[lang] }}
             </p>
           </div>
         </div>
@@ -107,7 +107,7 @@
         <button
           class="btn btn-warning btn-lg"
           (click)="addToCart()">
-          🛒 Dodaj u korpu
+          🛒 {{t.addToCart}}
         </button>
 
       </div>
@@ -118,12 +118,12 @@
 
   <ng-template #notFound>
     <div class="text-center py-5">
-      <h2>Igra nije pronađena</h2>
+      <h2>{{t.GameNotFound}}</h2>
 
       <a
         routerLink="/catalog"
         class="btn btn-primary mt-3">
-        Nazad na katalog
+        {{t.back}}
       </a>
     </div>
   </ng-template>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService, Lang } from '../../services/language-service';
 
 @Component({
   selector: 'app-about',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './about.css',
 })
 export class About {
-  lang: string = localStorage.getItem('lang') || 'sr';
+  lang: Lang = localStorage.getItem('lang') as Lang;
+
+  private langService = inject(LanguageService);
   ngOnInit() {
     //this.lang = 'en';
   }
@@ -70,8 +73,7 @@ export class About {
     return this.content[this.lang as 'sr' | 'en'];
   }
 
-  changeLang(lang: string) {
-    localStorage.setItem('lang', lang);
-    this.lang = lang;
+  changeLang(lang: Lang) {
+    this.langService.setLang(lang);
   }
 }

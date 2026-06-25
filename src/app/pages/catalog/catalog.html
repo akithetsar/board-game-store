@@ -7,7 +7,6 @@
   <div class="row g-3 mb-4">
     <div class="col-12 col-md-4" *ngFor="let cat of categories">
       <div class="cat-tile" [class.active]="selectedGroup === cat.key" (click)="setGroup(cat.key)">
-        <div class="cat-tile__icon">{{ cat.icon }}</div>
         <h5 class="cat-tile__name">{{ lang === 'sr' ? cat.sr : cat.en }}</h5>
         <p class="cat-tile__count">{{ countFor(cat.key) }} {{ t.Games }}</p>
       </div>
@@ -25,15 +24,15 @@
       <button class="btn"
               [class.btn-dark]="selectedGroup === 'Family'"
               [class.btn-outline-secondary]="selectedGroup !== 'Family'"
-              (click)="setGroup('Family')">👨‍👩‍👧 {{ t.Family }}</button>
+              (click)="setGroup('Family')"> {{ t.Family }}</button>
       <button class="btn"
               [class.btn-dark]="selectedGroup === 'Strategy'"
               [class.btn-outline-secondary]="selectedGroup !== 'Strategy'"
-              (click)="setGroup('Strategy')">♟️ {{ t.Strategy }}</button>
+              (click)="setGroup('Strategy')"> {{ t.Strategy }}</button>
       <button class="btn"
               [class.btn-dark]="selectedGroup === 'Party'"
               [class.btn-outline-secondary]="selectedGroup !== 'Party'"
-              (click)="setGroup('Party')">🎉 {{ t.Party }}</button>
+              (click)="setGroup('Party')"> {{ t.Party }}</button>
     </div>
 
     <!-- Sort buttons (right) -->
@@ -80,7 +79,7 @@
         <div class="card-body d-flex flex-column">
           <h5 class="card-title" style="font-size: 0.95rem;">{{ displayName(g) }}</h5>
           <p class="card-text mb-1 small text-muted">
-            👥 {{ g.players }} &nbsp;|&nbsp; 🎂 {{ g.age }} &nbsp;|&nbsp; ⏱ {{ g.duration }}
+             {{ g.players }} &nbsp;|&nbsp;  {{ g.age }} &nbsp;|&nbsp;  {{ g.duration }}
           </p>
           <p class="mb-1 small">
             <span class="badge bg-secondary">{{ displayGroup(g) }}</span>
@@ -92,7 +91,7 @@
               {{ t.Details }}
             </a>
             <button class="btn btn-sm btn-warning flex-fill text-center" (click)="addToCart(g)">
-              🛒 {{ t.AddToCart }}
+               {{ t.AddToCart }}
             </button>
           </div>
         </div>
@@ -101,7 +100,7 @@
 
     <!-- Empty state -->
     <div *ngIf="displayedGames.length === 0" class="col-12 text-center py-5 text-muted">
-      <div style="font-size: 3rem;">🔍</div>
+      <div style="font-size: 3rem;"></div>
       <p class="mt-2">{{ lang === 'sr' ? 'Nema pronađenih igara.' : 'No games found.' }}</p>
     </div>
   </div>

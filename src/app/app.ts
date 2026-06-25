@@ -2,15 +2,28 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
+import { Lang, LanguageService } from './services/language-service';
+import { Breadcrumb } from "./components/breadcrumb/breadcrumb";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, Footer],
+  imports: [RouterOutlet, Header, Footer, Breadcrumb],
   templateUrl: './app.html'
 })
 export class App {
+
+  lang: Lang
+  private langService: LanguageService
+
+  constructor(langService: LanguageService) {
+    this.langService = langService
+    this.lang = this.langService.current
+  }
   ngOnInit() {
-    localStorage.setItem('lang', 'sr'); // default language is Serbian
+    if (!localStorage.getItem('lang')) {
+      this.langService.setLang('sr')
+    }
+    else { this.lang = this.langService.current }
   }
 }

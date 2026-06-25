@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {  Lang, LanguageService } from '../../services/language-service';
 
 @Component({
   selector: 'app-login',
@@ -52,7 +53,7 @@ export class Login {
   }
 
   ngOnInit(){
-    this.language = localStorage.getItem('language') || 'sr';
+    this.language = localStorage.getItem('lang') as Lang || 'sr';
   }
 
   switchMode(mode: boolean) {
@@ -61,7 +62,7 @@ export class Login {
     this.isLogin = mode;
   }
 
-  private language ='';
+  private language:Lang = 'sr';
 
   register() {
     const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');

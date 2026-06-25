@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
 import { Cart } from '../../models/Cart';
 import { Order } from '../../models/Order';
+import {  Lang, LanguageService } from '../../services/language-service';
 
 @Component({
   selector: 'app-account',
@@ -17,10 +18,11 @@ export class Account {
   loggedUser: User | null = null;
   cart: Cart = new Cart();
   orders: Order[] = [];
+  private languageService = inject(LanguageService);
 
   private router = inject(Router);
 
-  lang = 'sr';
+  lang:Lang = this.languageService.current;
 
   content = {
     sr: {
@@ -48,7 +50,7 @@ export class Account {
   };
 
   ngOnInit() {
-    this.lang = localStorage.getItem('lang') || 'sr';
+    this.lang = localStorage.getItem('lang') as Lang || 'sr';
     //this.lang = 'en';
 
     const userData = localStorage.getItem('loggedUser');

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { LanguageService, Lang } from '../../services/language-service';
+
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,13 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./header.css']
 })
 export class Header implements OnInit {
-  lang: 'sr' | 'en' = 'sr';
+  private langService = inject(LanguageService);
+
+  // isto ime, isti tip kao pre - HTML ostaje neizmenjen
+  get lang(): Lang {
+    return this.langService.current;
+  }
+
   cartCount = 0;
   isLoggedIn = false;
   username = '';
@@ -19,7 +27,6 @@ export class Header implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Refresh on every navigation so cart badge stays in sync
     this.refresh();
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
@@ -27,7 +34,6 @@ export class Header implements OnInit {
   }
 
   refresh() {
-    this.lang = (localStorage.getItem('lang') ?? 'sr') as 'sr' | 'en';
     const raw = localStorage.getItem('loggedUser');
     if (raw) {
       const user = JSON.parse(raw);
@@ -41,9 +47,9 @@ export class Header implements OnInit {
     }
   }
 
-  setLang(lang: 'sr' | 'en') {
-    this.lang = lang;
-    localStorage.setItem('lang', lang);
+  setLang(lang: Lang) {
+    this.langService.setLang(lang);
+    window.location.reload();
   }
 
   logout() {

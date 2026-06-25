@@ -6,6 +6,7 @@ import { Game } from '../../services/game';
 import { GameModel } from '../../models/games';
 import { Catalog } from '../catalog/catalog';
 import { Cart } from '../../models/Cart';
+import { Lang, LanguageService } from '../../services/language-service';
 
 @Component({
   selector: 'app-game-detail',
@@ -16,12 +17,35 @@ import { Cart } from '../../models/Cart';
 export class GameDetail implements OnInit {
   game?: GameModel;
   selectedImage = '';
-
+  lang: Lang = inject(LanguageService).current;
   loggedUser = JSON.parse(localStorage.getItem('loggedUser') ?? 'null');
 
   private route = inject(ActivatedRoute);
   private gameService = inject(Game);
-  
+
+
+  content = {
+    sr: {
+      description: 'Opis igre',
+      players: 'Igrača',
+      age: 'Uzrast',
+      duration: 'Trajanje',
+      price: 'Cena',
+      addToCart: 'Dodaj u korpu',
+      back: 'Nazad na katalog',
+      GameNotFound: 'Igra nije pronađena'
+    },
+    en: {
+      back: 'Back to catalog',
+      GameNotFound: 'Game not found',
+      addToCart: 'Add to Cart',
+      description: 'Description',
+      players: 'Players',
+      age: 'Age',
+      duration: 'Duration',
+      price: 'Price'
+    }
+  }
 
   ngOnInit(): void {
     const raw = localStorage.getItem('loggedUser');
@@ -44,22 +68,26 @@ export class GameDetail implements OnInit {
 
   addToCart(): void {
     if (!this.loggedUser) {
-          //alert(this.t.LoginRequired);
-          return;
-        }
-        if (!this.loggedUser.cart) this.loggedUser.cart = new Cart();
-        this.loggedUser.cart.items.push(this.game);
-    
-        // Persist to both localStorage keys
-        const users = JSON.parse(localStorage.getItem('registeredUsers') ?? '[]');
-        for (const u of users) {
-          if (u.username === this.loggedUser.username) {
-            u.cart = this.loggedUser.cart;
-            break;
-          }
-        }
-        
-        localStorage.setItem('registeredUsers', JSON.stringify(users));
-        localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+      //alert(this.t.LoginRequired);
+      return;
+    }
+    if (!this.loggedUser.cart) this.loggedUser.cart = new Cart();
+    this.loggedUser.cart.items.push(this.game);
+
+    // Persist to both localStorage keys
+    const users = JSON.parse(localStorage.getItem('registeredUsers') ?? '[]');
+    for (const u of users) {
+      if (u.username === this.loggedUser.username) {
+        u.cart = this.loggedUser.cart;
+        break;
       }
+    }
+
+    localStorage.setItem('registeredUsers', JSON.stringify(users));
+    localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+  }
+
+  get t() {
+    return this.content[this.lang];
+  }
 }
