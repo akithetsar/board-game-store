@@ -1,13 +1,23 @@
-<h2>Gallery</h2>
+<div class="container py-3">
+  <h2 class="mb-3">Galerija</h2>
 
-<div class="grid">
-  <div class="card">
-    <img src="assets/game1.jpg" width="100%" />
-    <p>Event 1</p>
+  <div class="row g-3">
+    <div class="col-6 col-md-4 col-lg-3" *ngFor="let img of images">
+      <div class="card overflow-hidden">
+        <img [src]="img" class="card-img-top gallery-image" alt="">
+      </div>
+    </div>
   </div>
 
-  <div class="card">
-    <img src="assets/game2.jpg" width="100%" />
-    <p>Event 2</p>
+  <h3 class="mt-4">Videi</h3>
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-4" *ngFor="let video of videos">
+    <div class="card">
+      <div class="ratio ratio-16x9">
+        <iframe [src]="embedUrl(video)" title="Video tutorial" frameborder="0" allowfullscreen></iframe>
+      </div>      
+    </div>
   </div>
+</div>
+
 </div>
