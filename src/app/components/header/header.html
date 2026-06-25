@@ -3,7 +3,7 @@
 
     <!-- ── Brand ─────────────────────────────────────── -->
     <a class="navbar-brand fw-bold" routerLink="/">
-       <span style="color: #f59e0b;">Board Game Store</span>
+       <span style="color: #f59e0b;">{{ lang === 'sr' ? 'Prodavnica društvenih igara' : 'Board Game Store' }}</span>
     </a>
 
     <!-- ── Mobile toggle ─────────────────────────────── -->
@@ -39,18 +39,20 @@
           </a>
         </li>
 
-        <!-- Catalog – dropdown ──────────────────────── -->
-       <li>
-            <a class="nav-link" routerLink="/catalog">
-    Katalog igara
-  </a>
+        <!-- Catalog -->
+        <li>
+          <a class="nav-link" routerLink="/catalog">
+            {{ lang === 'sr' ? 'Katalog' : 'Catalog' }}
+          </a>
         </li>
 
         <!-- My Account -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/account" routerLinkActive="active">
             {{ lang === 'sr' ? 'Moj nalog' : 'My Account' }}
-            <span *ngIf="cartCount > 0" class="badge bg-danger ms-1">{{ cartCount }}</span>
+            @if (cartCount > 0) {
+              <span class="badge bg-danger ms-1">{{ cartCount }}</span>
+            }
           </a>
         </li>
 
@@ -83,28 +85,29 @@
         <!-- Cart button with badge -->
         <a routerLink="/account" class="btn btn-warning btn-sm position-relative">
           🛒
-          <span *ngIf="cartCount > 0"
-                class="position-absolute top-0 start-100 translate-middle
-                       badge rounded-pill bg-danger"
-                style="font-size: 0.6rem;">
-            {{ cartCount }}
-          </span>
+          @if (cartCount > 0) {
+            <span class="position-absolute top-0 start-100 translate-middle
+                         badge rounded-pill bg-danger"
+                  style="font-size: 0.6rem;">
+              {{ cartCount }}
+            </span>
+          }
         </a>
 
         <!-- Logged-in user chip + logout -->
-        <ng-container *ngIf="isLoggedIn">
+        @if (isLoggedIn) {
           <span class="text-white-50 small d-none d-lg-inline">{{ username }}</span>
           <button class="btn btn-outline-light btn-sm" (click)="logout()">
             {{ lang === 'sr' ? 'Odjavi se' : 'Logout' }}
           </button>
-        </ng-container>
+        }
 
         <!-- Login link when not logged in -->
-        <ng-container *ngIf="!isLoggedIn">
+        @if (!isLoggedIn) {
           <a class="btn btn-outline-warning btn-sm" routerLink="/account">
             {{ lang === 'sr' ? 'Prijavi se' : 'Login' }}
           </a>
-        </ng-container>
+        }
 
       </div>
     </div>

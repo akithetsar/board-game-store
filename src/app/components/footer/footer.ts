@@ -21,7 +21,8 @@ export class Footer {
       catalog: 'Katalog igara',
       gallery: 'Galerija',
       about: 'O nama',
-      account: 'Moj nalog'
+      account: 'Moj nalog',
+      workingDays: 'Ponedeljak - Petak: 09:00 - 21:00 | Subota: 10:00 - 20:00'
 
     },
     en: {
@@ -33,7 +34,8 @@ export class Footer {
       catalog: 'Game Catalog',
       gallery: 'Gallery',
       about: 'About Us',
-      account: 'My Account'
+      account: 'My Account',
+      workingDays: 'Monday - Friday: 09:00 - 21:00 | Saturday: 10:00 - 20:00'
     }
   }
 

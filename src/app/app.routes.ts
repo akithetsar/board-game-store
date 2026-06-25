@@ -10,10 +10,10 @@ import { GameDetail } from './pages/game-detail/game-detail';
 
 export const routes: Routes = [
   { path: '', component: Home },
-  { path: 'gallery', component: Gallery },
-  { path: 'catalog', component: Catalog },
-  { path: 'account', component: Account },
-  { path: 'about', component: About },
-  {path :'login', component: Login},
-  { path: 'catalog/:id', component: GameDetail,}
+  { path: 'gallery', component: Gallery, data: { breadcrumb: { sr: 'Galerija', en: 'Gallery' } } },
+  { path: 'catalog', component: Catalog, data: { breadcrumb: { sr: 'Katalog', en: 'Catalog' } } },
+  { path: 'account', component: Account, data: { breadcrumb: { sr: 'Nalog', en: 'Account' } } },
+  { path: 'about', component: About, data: { breadcrumb: { sr: 'O nama', en: 'About Us' } } },
+  { path: 'login', component: Login, data: { breadcrumb: { sr: 'Prijava', en: 'Login' } } },
+  { path: 'catalog/:id', component: GameDetail, data: { breadcrumb: { sr: 'Detalji igre', en: 'Game Details' } } },
 ];
