@@ -1,0 +1,130 @@
+<div class="container py-5">
+
+  <a
+    routerLink="/catalog"
+    class="btn btn-outline-secondary mb-4">
+    ← Nazad na katalog
+  </a>
+
+  <div *ngIf="game; else notFound">
+
+    <div class="row g-5">
+
+      <!-- Image Section -->
+      <div class="col-lg-6">
+
+        <img
+          *ngIf="selectedImage"
+          [src]="'assets/images/' + selectedImage"
+          [alt]="game.name.sr"
+          class="img-fluid rounded shadow-sm border mb-3 w-100">
+
+        <div
+          *ngIf="game.images.length > 1"
+          class="d-flex gap-2 flex-wrap">
+
+          <img
+            *ngFor="let img of game.images"
+            [src]="'assets/images/' + img"
+            [alt]="game.name.sr"
+            (click)="selectImage(img)"
+            class="border rounded"
+            style="
+              width: 90px;
+              height: 90px;
+              object-fit: cover;
+              cursor: pointer;
+            ">
+        </div>
+
+      </div>
+
+      <!-- Details Section -->
+      <div class="col-lg-6">
+
+        <span class="badge bg-warning text-dark fs-6 mb-2">
+          {{ game.group.sr }}
+        </span>
+
+        <h1 class="fw-bold mb-3">
+          {{ game.name.sr }}
+        </h1>
+
+        <h2 class="text-success mb-4">
+          {{ game.price }} RSD
+        </h2>
+
+        <div class="row g-3 mb-4">
+
+          <div class="col-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <div class="fs-3">👥</div>
+                <small class="text-muted">Igrača</small>
+                <div class="fw-semibold">
+                  {{ game.players }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <div class="fs-3">🎂</div>
+                <small class="text-muted">Uzrast</small>
+                <div class="fw-semibold">
+                  {{ game.age }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <div class="fs-3">⏱️</div>
+                <small class="text-muted">Trajanje</small>
+                <div class="fw-semibold">
+                  {{ game.duration }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4>Opis igre</h4>
+
+            <p class="mb-0">
+              {{ game.description?.sr }}
+            </p>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-warning btn-lg">
+          🛒 Dodaj u korpu
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <ng-template #notFound>
+    <div class="text-center py-5">
+      <h2>Igra nije pronađena</h2>
+
+      <a
+        routerLink="/catalog"
+        class="btn btn-primary mt-3">
+        Nazad na katalog
+      </a>
+    </div>
+  </ng-template>
+
+</div>

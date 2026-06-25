@@ -1,0 +1,24 @@
+/* Active nav link gold underline */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+  color: #f59e0b !important;
+}
+
+/* Language toggle: pressed state */
+.btn-group .btn.active {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: #1f2937;
+}
+
+/* Dropdown item hover */
+.dropdown-menu-dark .dropdown-item:hover {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+/* Cart badge pop */
+.badge.bg-danger {
+  font-size: 0.6rem;
+  padding: 3px 5px;
+}

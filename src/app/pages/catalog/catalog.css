@@ -1,0 +1,20 @@
+/* Catalog page – all cat-tile styles are in global styles.css */
+
+/* Price text */
+.card strong { color: #1f2937; }
+
+/* Card hover lift */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Sort button active */
+.btn-outline-secondary.active-sort {
+  background: #1f2937;
+  color: #fff;
+  border-color: #1f2937;
+}

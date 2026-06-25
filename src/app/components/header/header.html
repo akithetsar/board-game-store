@@ -1,15 +1,112 @@
-<header style="background:#1f2937; color:white; padding:15px;">
-  <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-    
-    <h2>🎲 Board Game Store</h2>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: var(--c-dark, #1f2937);">
+  <div class="container">
 
-    <nav style="display:flex; gap:10px;">
-      <a routerLink="/" routerLinkActive="active">Home</a>
-      <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
-      <a routerLink="/catalog" routerLinkActive="active">Catalog</a>
-      <a routerLink="/account" routerLinkActive="active">My Account</a>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-    </nav>
+    <!-- ── Brand ─────────────────────────────────────── -->
+    <a class="navbar-brand fw-bold" routerLink="/">
+      🎲 <span style="color: #f59e0b;">Board Game Store</span>
+    </a>
 
+    <!-- ── Mobile toggle ─────────────────────────────── -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- ── Nav items ─────────────────────────────────── -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
+            {{ lang === 'sr' ? 'Početna' : 'Home' }}
+          </a>
+        </li>
+
+        <!-- Gallery -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/gallery" routerLinkActive="active">
+            {{ lang === 'sr' ? 'Galerija' : 'Gallery' }}
+          </a>
+        </li>
+
+        <!-- Catalog – dropdown ──────────────────────── -->
+       <li>
+            <a class="nav-link" routerLink="/catalog">
+    Katalog igara
+  </a>
+        </li>
+
+        <!-- My Account -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/account" routerLinkActive="active">
+            {{ lang === 'sr' ? 'Moj nalog' : 'My Account' }}
+            <span *ngIf="cartCount > 0" class="badge bg-danger ms-1">{{ cartCount }}</span>
+          </a>
+        </li>
+
+        <!-- About -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">
+            {{ lang === 'sr' ? 'O nama' : 'About Us' }}
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- ── Right side: lang + cart + user ─────────── -->
+      <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+
+        <!-- Language toggle -->
+        <div class="btn-group btn-group-sm" role="group" aria-label="Language">
+          <button
+            type="button"
+            class="btn btn-outline-light"
+            [class.active]="lang === 'sr'"
+            (click)="setLang('sr')">SR</button>
+          <button
+            type="button"
+            class="btn btn-outline-light"
+            [class.active]="lang === 'en'"
+            (click)="setLang('en')">EN</button>
+        </div>
+
+        <!-- Cart button with badge -->
+        <a routerLink="/account" class="btn btn-warning btn-sm position-relative">
+          🛒
+          <span *ngIf="cartCount > 0"
+                class="position-absolute top-0 start-100 translate-middle
+                       badge rounded-pill bg-danger"
+                style="font-size: 0.6rem;">
+            {{ cartCount }}
+          </span>
+        </a>
+
+        <!-- Logged-in user chip + logout -->
+        <ng-container *ngIf="isLoggedIn">
+          <span class="text-white-50 small d-none d-lg-inline">{{ username }}</span>
+          <button class="btn btn-outline-light btn-sm" (click)="logout()">
+            {{ lang === 'sr' ? 'Odjavi se' : 'Logout' }}
+          </button>
+        </ng-container>
+
+        <!-- Login link when not logged in -->
+        <ng-container *ngIf="!isLoggedIn">
+          <a class="btn btn-outline-warning btn-sm" routerLink="/account">
+            {{ lang === 'sr' ? 'Prijavi se' : 'Login' }}
+          </a>
+        </ng-container>
+
+      </div>
+    </div>
   </div>
-</header>
+</nav>

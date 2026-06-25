@@ -1,5 +1,6 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
+/* ── Reset ──────────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -7,31 +8,47 @@
   font-family: Arial, sans-serif;
 }
 
-body {
-  background: #f5f6fa;
-  color: #222;
+/* ── Theme tokens ───────────────────────────────────── */
+:root {
+  --c-dark:    #1f2937;   /* navbar / footer background    */
+  --c-gold:    #f59e0b;   /* primary accent                */
+  --c-gold-dk: #d97706;   /* hover gold                    */
+  --c-red:     #dc2626;   /* sale / danger badges          */
+  --c-bg:      #f5f6fa;   /* page background               */
+  --c-surface: #ffffff;   /* card surface                  */
+  --c-border:  #e5e7eb;
+  --c-muted:   #6b7280;
+  --c-text:    #222222;
 }
 
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+/* ── Responsive grid ────────────────────────────────── */
 .container {
   max-width: 1100px;
   margin: auto;
-  padding: 10px;
+  padding: 0 16px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  gap: 16px;
 }
 
+/* ── Cards ──────────────────────────────────────────── */
 .card {
-  background: white;
+  background: var(--c-surface);
   border-radius: 10px;
   padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--c-border);
 }
 
-/* buttons */
+/* ── Buttons ────────────────────────────────────────── */
 .btn-primary {
   background: #2563eb;
   color: white;
@@ -50,6 +67,10 @@ body {
   cursor: pointer;
 }
 
+/* Bootstrap override – make .btn-warning dark text */
+.btn-warning { color: var(--c-dark) !important; }
+
+/* ── Images ──────────────────────────────────────────── */
 .gallery-image {
   width: 100%;
   height: 200px;
@@ -63,7 +84,6 @@ body {
 
 .gallery-image:hover {
   transform: scale(1.05) translateY(-4px);
-  cursor: default;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
@@ -71,23 +91,92 @@ body {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-.game-image:hover {
-  transform: scale(1.05) translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
+.game-image:hover {
+  transform: scale(1.03) translateY(-2px);
+}
+
+/* ── Sticky sidebar ──────────────────────────────────── */
 aside {
   position: sticky;
   top: 20px;
 }
 
-.card .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+/* ── Section titles ──────────────────────────────────── */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--c-dark);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--c-gold);
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+/* ── Page wrapper (keeps footer at bottom) ───────────── */
+.page-wrapper {
+  min-height: calc(100vh - 62px - 120px);
+}
+
+/* ── Breadcrumb bar ──────────────────────────────────── */
+.breadcrumb-bar {
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  padding: 8px 0;
+  font-size: 0.8rem;
+}
+
+.breadcrumb { margin: 0; padding: 0; background: transparent; }
+.breadcrumb-item a { color: var(--c-gold-dk); text-decoration: none; }
+.breadcrumb-item a:hover { text-decoration: underline; }
+.breadcrumb-item.active { color: var(--c-muted); }
+.breadcrumb-item + .breadcrumb-item::before { content: "›"; color: #aaa; }
+
+/* ── Category tiles (catalog landing) ───────────────── */
+.cat-tile {
+  background: var(--c-surface);
+  border: 2px solid var(--c-border);
+  border-radius: 14px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  user-select: none;
+}
+
+.cat-tile:hover {
+  border-color: var(--c-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.cat-tile.active {
+  border-color: var(--c-gold);
+  background: #fffbeb;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2);
+}
+
+.cat-tile__icon { font-size: 2.6rem; line-height: 1; margin-bottom: 10px; }
+.cat-tile__name { font-size: 1rem; font-weight: 700; color: var(--c-dark); margin-bottom: 4px; }
+.cat-tile__count { font-size: 0.82rem; color: var(--c-muted); margin: 0; }
+
+/* ── Star rating ─────────────────────────────────────── */
+.stars { display: inline-flex; gap: 2px; font-size: 1.25rem; color: #d1d5db; cursor: pointer; }
+.stars .star.filled { color: var(--c-gold); }
+.stars .star:hover  { color: var(--c-gold-dk); }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section-title { font-size: 1.15rem; }
+  .cat-tile { padding: 16px 10px; }
+  .cat-tile__icon { font-size: 2rem; }
 }
