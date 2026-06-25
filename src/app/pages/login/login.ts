@@ -35,6 +35,7 @@ export class Login {
 
   content={
     en: {
+      title: 'Prodavnica društvenih igara - Login/Register',
       login: 'Login',
       register: 'Register',
       username: 'Username',
@@ -43,6 +44,7 @@ export class Login {
       surname: 'Surname'
     },
     sr: {
+      title: 'Prodavnica društvenih igara - Prijava/Registracija',
       login: 'Prijava',
       register: 'Registracija',
       username: 'Korisničko ime',

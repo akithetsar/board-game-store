@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Game } from '../../services/game';
 import { GameModel } from '../../models/games';
+import { LanguageService } from '../../services/language-service';
 
 @Component({
   selector: 'app-gallery',
@@ -20,14 +21,24 @@ export class Gallery {
     'https://www.youtube.com/watch?v=rBDWzpjFyjs'
   ];
 
+  content={
+    sr: {
+      title: 'Prodavnica društvenih igara - Galerija',
+    },
+    en: {
+      title: 'Board Game Store - Gallery',
+    }
+  }
+
   games:GameModel[] =[]
 
   images = [
     '/assets/images/store/store1.jpg',
     '/assets/images/store/store2.png',
   ];
-
+lang: string = inject(LanguageService).current;
   ngOnInit() {
+
     this.loadImagesfromGames();
   }
 
@@ -52,5 +63,8 @@ export class Gallery {
       const id = watchUrl.split('v=')[1]?.split('&')[0] ?? watchUrl;
       return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${id}`);
     }
+  }
+  get t() {
+    return this.content[this.lang as 'sr' | 'en'];
   }
 }

@@ -28,15 +28,17 @@ export class Catalog implements OnInit {
   private gameService = inject(Game);
   private route = inject(ActivatedRoute);
 
-  // ── Labels ──────────────────────────────────────────
-  labels = {
+  // Content for localization
+  content = {
     sr: {
+      title: 'Prodavnica društvenih igara - Katalog',
       All: 'Sve', Family: 'Porodične', Strategy: 'Strateške', Party: 'Zabavne',
       Details: 'Detalji', AddToCart: 'Dodaj u korpu', Games: 'igara',
       Catalog: 'Katalog igara', SortName: 'Naziv', SortPrice: 'Cena',
       Search: 'Pretraži igre...', LoginRequired: 'Morate biti prijavljeni da dodate u korpu.'
     },
     en: {
+      title: 'Board Game Store - Catalog',
       All: 'All', Family: 'Family', Strategy: 'Strategy', Party: 'Party',
       Details: 'Details', AddToCart: 'Add to Cart', Games: 'games',
       Catalog: 'Game Catalog', SortName: 'Name', SortPrice: 'Price',
@@ -50,9 +52,9 @@ export class Catalog implements OnInit {
     { key: 'Party', sr: 'Zabavne igre', en: 'Party Games' },
   ];
 
-  get t() { return this.labels[this.lang]; }
+  get t() { return this.content[this.lang]; }
 
-  // ── Init ─────────────────────────────────────────────
+  // Initialization
   ngOnInit() {
     this.lang = (localStorage.getItem('lang') ?? 'sr') as 'sr' | 'en';
     this.games = this.gameService.getGames();
@@ -69,7 +71,7 @@ export class Catalog implements OnInit {
     });
   }
 
-  // ── Helpers ──────────────────────────────────────────
+  // Helpers for displaying localized text
   displayName(g: GameModel) { return this.lang === 'en' ? g.name.en ?? g.name.sr : g.name.sr; }
   displayGroup(g: GameModel) { return this.lang === 'en' ? g.group.en ?? g.group.sr : g.group.sr; }
 
@@ -118,7 +120,7 @@ export class Catalog implements OnInit {
     return list;
   }
 
-  // ── Cart ─────────────────────────────────────────────
+  // Cart management
   addToCart(g: GameModel) {
     if (!this.loggedUser) {
       alert(this.t.LoginRequired);

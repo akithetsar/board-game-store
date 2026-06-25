@@ -17,6 +17,7 @@ export class About {
 
   content = {
     sr: {
+      titlePage:'Prodavnica društvenih igara - O nama',
       partnersTitle: 'Korisni linkovi',
       title: 'O nama',
       historyTitle: 'Istorijat',
@@ -43,6 +44,7 @@ export class About {
     },
 
     en: {
+      titlePage: 'Board Game Store - About Us',
       partnersTitle: 'Useful Links',
       title: 'About Us',
       historyTitle: 'History',

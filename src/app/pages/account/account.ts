@@ -26,6 +26,7 @@ export class Account {
 
   content = {
     sr: {
+      title: 'Prodavnica društvenih igara - Moj nalog',
       logout: 'Odjavi se',
       order: 'Porudžbina',
       buy: 'Kupi sada',
@@ -45,7 +46,8 @@ export class Account {
       cart: 'Cart',
       orders: 'Orders',
       noItems: 'No items yet',
-      account: 'My Account'
+      account: 'My Account',
+      title: 'Board Game Store - My Account'
     }
   };
 

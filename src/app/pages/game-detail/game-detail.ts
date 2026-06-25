@@ -26,6 +26,7 @@ export class GameDetail implements OnInit {
 
   content = {
     sr: {
+      title: 'Prodavnica društvenih igara - Detalji igre',
       description: 'Opis igre',
       players: 'Igrača',
       age: 'Uzrast',
@@ -36,6 +37,7 @@ export class GameDetail implements OnInit {
       GameNotFound: 'Igra nije pronađena'
     },
     en: {
+      title: 'Board Game Store - Game Details',
       back: 'Back to catalog',
       GameNotFound: 'Game not found',
       addToCart: 'Add to Cart',
