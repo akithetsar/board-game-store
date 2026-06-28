@@ -140,4 +140,48 @@ export class Catalog implements OnInit {
     localStorage.setItem('registeredUsers', JSON.stringify(users));
     localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
   }
+  downloadPDF() {
+    const lang = this.lang;
+    const label = (sr: string, en: string) => lang === 'en' ? en : sr;
+
+    const rows = this.games.map(g => `
+      <tr>
+        <td>${this.displayName(g)}</td>
+        <td>${this.displayGroup(g)}</td>
+        <td>${g.players}</td>
+        <td>${g.age}</td>
+        <td>${g.duration}</td>
+        <td><strong>${g.price} RSD</strong></td>
+      </tr>`).join('');
+
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8">
+      <title>${label('Katalog igara', 'Game Catalog')}</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 24px; color: #222; }
+        h1   { text-align: center; margin-bottom: 4px; }
+        p.sub{ text-align: center; color: #888; font-size: 12px; margin-bottom: 20px; }
+        table{ width: 100%; border-collapse: collapse; font-size: 12px; }
+        th, td { border: 1px solid #ddd; padding: 7px 10px; }
+        th { background: #f3f4f6; font-weight: 600; }
+        tr:nth-child(even) td { background: #fafafa; }
+      </style></head><body>
+      <h1>${label('Katalog igara', 'Game Catalog')}</h1>
+      <p class="sub">Board Game Store &nbsp;|&nbsp; ${new Date().toLocaleDateString()}</p>
+      <table>
+        <thead><tr>
+          <th>${label('Naziv','Name')}</th>
+          <th>${label('Kategorija','Category')}</th>
+          <th>${label('Igrači','Players')}</th>
+          <th>${label('Uzrast','Age')}</th>
+          <th>${label('Trajanje','Duration')}</th>
+          <th>${label('Cena','Price')}</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <script>window.onload=()=>{window.print();window.onafterprint=()=>window.close();}</script>
+      </body></html>`;
+
+    const win = window.open('', '_blank');
+    if (win) { win.document.write(html); win.document.close(); }
+  }
 }

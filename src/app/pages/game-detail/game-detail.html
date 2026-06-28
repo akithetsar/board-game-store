@@ -12,7 +12,46 @@
   <div *ngIf="game; else notFound">
 
     <div class="row g-5">
+      <!-- ── COMMENTS ─────────────────────────────────── -->
+      <div class="mt-5 pt-4 border-top">
+        <h5 class="mb-3">{{ t.commentsLabel }}</h5>
 
+        <!-- Input -->
+        <!-- Not logged in -->
+  <p *ngIf="!loggedUser" class="text-muted small mb-3">
+    <a routerLink="/account">{{ lang === 'sr' ? 'Prijavite se' : 'Log in' }}</a>
+    {{ lang === 'sr' ? 'da ostavite komentar.' : 'to leave a comment.' }}
+  </p>
+
+  <!-- Input (logged in only) -->
+  <div *ngIf="loggedUser" class="input-group mb-3" style="max-width: 600px;">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="newComment"
+      [placeholder]="t.writeComment"
+      (keydown.enter)="submitComment()">
+    <button class="btn btn-warning fw-semibold" (click)="submitComment()">
+      {{ t.submitComment }}
+    </button>
+  </div>
+
+        <!-- Empty state -->
+        <p *ngIf="comments.length === 0" class="text-muted small">
+          {{ t.noComments }}
+        </p>
+
+        <!-- Comment list -->
+        <ul class="list-unstyled" style="max-width: 600px;">
+          <li *ngFor="let c of comments"
+              class="border rounded p-3 mb-2 bg-light">
+            <p class="mb-1">{{ c.text }}</p>
+            <small class="text-muted">
+              <strong>{{ c.author }}</strong> &nbsp;·&nbsp; {{ c.date }}
+            </small>
+          </li>
+        </ul>
+</div>
       <!-- Image Section -->
       <div class="col-lg-6">
 
@@ -113,6 +152,47 @@
           🛒 {{t.addToCart}}
         </button>
 
+        <!-- ── STAR RATING ──────────────────────────────── -->
+        <div class="mt-4 pt-3 border-top">
+          <h6 class="mb-2 fw-semibold">{{ t.ratingLabel }}</h6>
+
+          <!-- Average display -->
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span>
+              <span *ngFor="let s of [1,2,3,4,5]"
+                    style="color: #f59e0b; font-size: 1.1rem;">
+                {{ s <= avgRating ? '★' : '☆' }}
+              </span>
+            </span>
+            <small class="text-muted">
+              {{ avgRating }} / 5 &nbsp;({{ ratingCount }} {{ t.votes }})
+            </small>
+          </div>
+
+          <!-- Interactive stars -->
+          <!-- Not logged in -->
+  <p *ngIf="!loggedUser" class="text-muted small mt-1">
+    <a routerLink="/account">{{ lang === 'sr' ? 'Prijavite se' : 'Log in' }}</a>
+    {{ lang === 'sr' ? 'da ocenite igru.' : 'to rate this game.' }}
+  </p>
+
+  <!-- Logged in, already voted -->
+  <!-- Logged in, already voted — still clickable to change -->
+  <div *ngIf="loggedUser && userRating > 0">
+    <small class="text-muted d-block mb-1">{{ t.yourVote }}: {{ userRating }}/5 — {{ lang === 'sr' ? 'kliknite da promenite' : 'click to change' }}</small>
+  </div>
+
+  <!-- Logged in — always show interactive stars -->
+  <div *ngIf="loggedUser" class="d-flex gap-1">
+    <span
+      *ngFor="let s of [1,2,3,4,5]"
+      style="font-size: 1.8rem; cursor: pointer; transition: color .1s;"
+      [style.color]="s <= (hoverRating || userRating) ? '#f59e0b' : '#d1d5db'"
+      (mouseenter)="hoverRating = s"
+      (mouseleave)="hoverRating = 0"
+      (click)="setRating(s)">★</span>
+  </div>
+        </div>
       </div>
 
     </div>
