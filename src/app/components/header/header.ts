@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -24,15 +24,26 @@ export class Header implements OnInit {
   isLoggedIn = false;
   username = '';
 
-  constructor(private router: Router) {}
-
+  /*  */
+  constructor(private router: Router, private el: ElementRef) {}
+ 
+  /* Refresh the header state */
   ngOnInit() {
     this.refresh();
+
+    /* Subscribe to router events to refresh the header state on navigation */
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => this.refresh());
   }
 
+  showed = true;
+  toogleMeni(){
+    this.showed = !this.showed;      
+  }
+
+
+  /* Refresh the header state based on localStorage */
   refresh() {
     const raw = localStorage.getItem('loggedUser');
     if (raw) {

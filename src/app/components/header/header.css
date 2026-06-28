@@ -4,6 +4,18 @@
   color: #f59e0b !important;
 }
 
+/* Navbar collapse transition */
+.navbar-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease;
+}
+
+/* Navbar collapse when shown */
+.navbar-collapse.show {
+  max-height: 500px; 
+}
+
 /* Language toggle: pressed state */
 .btn-group .btn.active {
   background: #f59e0b;
