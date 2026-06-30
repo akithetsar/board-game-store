@@ -3,7 +3,7 @@
 <!-- ══ HERO ════════════════════════════════════════════════ -->
 <div style="background:#1f2937; color:#fff; padding: 60px 0 50px;">
   <div class="container text-center">
-    <div style="font-size:3rem; margin-bottom:12px;">🎲</div>
+    <div style="font-size:3rem; margin-bottom:12px;"></div>
     <h1 class="fw-bold mb-2" style="color:#f59e0b;">{{ t.heroTitle }}</h1>
     <p class="mb-4" style="color:rgba(255,255,255,0.7); font-size:1.1rem;">{{ t.heroSub }}</p>
     <a routerLink="/catalog" class="btn btn-warning btn-lg fw-semibold">
@@ -16,7 +16,7 @@
 
   <!-- ══ DEALS ══════════════════════════════════════════════ -->
   <section class="mb-5">
-    <h2 class="section-title mb-4">🏷️ {{ t.dealsTitle }}</h2>
+    <h2 class="section-title mb-4"> {{ t.dealsTitle }}</h2>
     <div class="row g-3">
       <div class="col-12 col-md-4" *ngFor="let g of dealGames">
         <div class="card h-100" style="border-radius:12px; overflow:hidden; border:2px solid #fde68a;">
@@ -45,16 +45,16 @@
 
   <!-- ══ TOURNAMENTS ════════════════════════════════════════ -->
   <section class="mb-5">
-    <h2 class="section-title mb-4">🏆 {{ t.tournamentsTitle }}</h2>
+    <h2 class="section-title mb-4">{{ t.tournamentsTitle }}</h2>
     <div class="row g-3">
       <div class="col-12 col-md-4" *ngFor="let ev of tournaments">
         <div class="card h-100 p-3" style="border-radius:12px; border-left: 4px solid #f59e0b;">
           <p class="mb-1" style="font-size:0.8rem; color:#f59e0b; font-weight:600; text-transform:uppercase; letter-spacing:.05em;">
-            📅 {{ lang === 'sr' ? ev.dateSr : ev.dateEn }}
+            {{ lang === 'sr' ? ev.dateSr : ev.dateEn }}
           </p>
           <h6 class="fw-bold mb-1">{{ lang === 'sr' ? ev.nameSr : ev.nameEn }}</h6>
           <p class="text-muted small mb-0">
-            📍 {{ t.where }}: {{ lang === 'sr' ? ev.placeSr : ev.placeEn }}
+            {{ t.where }}: {{ lang === 'sr' ? ev.placeSr : ev.placeEn }}
           </p>
         </div>
       </div>
@@ -63,7 +63,7 @@
 
   <!-- ══ NEW ARRIVALS ═══════════════════════════════════════ -->
   <section class="mb-5">
-    <h2 class="section-title mb-4">🆕 {{ t.newTitle }}</h2>
+    <h2 class="section-title mb-4">{{ t.newTitle }}</h2>
     <div class="row g-3">
       <div class="col-6 col-md-4" *ngFor="let g of newGames">
         <div class="card h-100" style="border-radius:12px; overflow:hidden;">

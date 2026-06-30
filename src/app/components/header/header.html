@@ -85,7 +85,7 @@
 
         <!-- Cart button with badge -->
         <a routerLink="/account" class="btn btn-warning btn-sm position-relative">
-          🛒
+          {{ lang === 'sr' ? 'Korpa' : 'Cart' }}
           @if (cartCount > 0) {
             <span class="position-absolute top-0 start-100 translate-middle
                          badge rounded-pill bg-danger"
