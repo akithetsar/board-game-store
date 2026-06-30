@@ -1,0 +1,2 @@
+ng build --configuration production
+python -m http.server 8000
