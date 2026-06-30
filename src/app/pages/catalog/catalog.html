@@ -43,18 +43,18 @@
               (click)="sortBy('name')"
               [title]="sortField === 'name' ? sortDir : ''">
         {{ t.SortName }}
-        <span *ngIf="sortField === 'name'">{{ sortDir === 'asc' ? '↑' : '↓' }}</span>
+        <span *ngIf="sortField === 'name'">{{ sortDir === 'asc' ? '->' : '<-' }}</span>
       </button>
       <button class="btn btn-sm btn-outline-secondary"
               (click)="sortBy('price')"
               [title]="sortField === 'price' ? sortDir : ''">
         {{ t.SortPrice }}
-        <span *ngIf="sortField === 'price'">{{ sortDir === 'asc' ? '↑' : '↓' }}</span>
+        <span *ngIf="sortField === 'price'">{{ sortDir === 'asc' ? '->' : '<-' }}</span>
       </button>
     </div>
   </div>
   <button class="btn btn-sm btn-outline-danger" (click)="downloadPDF()">
-    📄 {{ lang === 'sr' ? 'Preuzmi PDF' : 'Download PDF' }}
+     {{ lang === 'sr' ? 'Preuzmi PDF' : 'Download PDF' }}
   </button>
   <!--Search bar -->
   <div class="mb-4">
