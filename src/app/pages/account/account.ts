@@ -6,6 +6,7 @@ import { User } from '../../models/user';
 import { Cart } from '../../models/Cart';
 import { Order } from '../../models/Order';
 import {  Lang, LanguageService } from '../../services/language-service';
+import { GameModel } from '../../models/games';
 
 @Component({
   selector: 'app-account',
@@ -69,6 +70,10 @@ export class Account {
     this.orders = this.loggedUser?.orders ?? [];
   }
 
+  getQuantity(item: GameModel): number {
+    return this.cart.items.filter((i) => i.id === item.id).length;
+  }
+
   logout() {
     localStorage.removeItem('loggedUser');
     this.router.navigate(['/login']);
@@ -82,7 +87,7 @@ export class Account {
     for (let i = 0; i < regisretedUsers.length; i++) {
       if (regisretedUsers[i].username === this.loggedUser.username) {
         for (let j = 0; j < regisretedUsers[i].cart.items.length; j++) {
-          if (regisretedUsers[i].cart.items[j] === item) {
+          if (regisretedUsers[i].cart.items[j] === item) {            
             regisretedUsers[i].cart.items.splice(j, 1);
             break;
           }
@@ -103,6 +108,20 @@ export class Account {
     return this.content[this.lang === 'en' ? 'en' : 'sr'];
   }
 
+  getCartTotal(): number {
+    if (!this.loggedUser || !this.loggedUser.cart) {
+      return 0;
+    }
+    let total = 0;
+    for (const item of this.loggedUser.cart.items) {
+      if (item.price === undefined) {
+        console.warn(`Item with id ${item.id} has undefined price.`);
+      }
+      total += item.price;
+    }
+    return total;
+  }
+
   checkout() {
     if (!this.loggedUser || !this.loggedUser.cart || this.loggedUser.cart.items.length === 0) {
       return;
@@ -119,6 +138,7 @@ export class Account {
     }
     const porudzibna = new Order();
     porudzibna.items = [...this.loggedUser.cart.items];
+    porudzibna.price = this.getCartTotal();
     this.loggedUser.orders.push(porudzibna);
     this.loggedUser.cart.items = [];
     localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));

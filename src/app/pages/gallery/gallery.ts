@@ -24,9 +24,13 @@ export class Gallery {
   content={
     sr: {
       title: 'Prodavnica društvenih igara - Galerija',
+      gallery: 'Galerija',
+      videos: 'Videi'
     },
     en: {
       title: 'Board Game Store - Gallery',
+      gallery: 'Gallery',
+      videos: 'Videos'
     }
   }
 

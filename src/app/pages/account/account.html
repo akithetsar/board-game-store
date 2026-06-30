@@ -27,12 +27,16 @@
         <span>
           {{ item.price }} RSD
         </span>
+        
         <button class="btn btn-sm btn-danger" (click)="removeFromCart(item)">
           {{ t.remove }}
         </button>
       </div>
     </li>
     }
+    <li class="list-group-item d-flex justify-content-between">
+      <strong>{{ getCartTotal() }} RSD</strong>
+    </li>
   </ul>
 
   <button class="btn btn-primary mt-3" (click)="checkout()">
@@ -78,6 +82,9 @@
         </div>
       </li>
       }
+      <li class="list-group-item">
+        <strong>{{ order.price }} RSD</strong>
+      </li>
     </ul>
   </div>
   }

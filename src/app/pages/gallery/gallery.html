@@ -1,7 +1,7 @@
 <title>{{t.title}}</title>
 
 <div class="container py-3">
-  <h2 class="mb-3">Galerija</h2>
+  <h2 class="mb-3">{{t.gallery}}</h2>
 
   <div class="row g-3">
     <div class="col-6 col-md-4 col-lg-3" *ngFor="let img of images">
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <h3 class="mt-4">Videi</h3>
+  <h3 class="mt-4">{{t.videos}}</h3>
 <div class="row g-3">
   <div class="col-12 col-md-6 col-lg-4" *ngFor="let video of videos">
     <div class="card">
