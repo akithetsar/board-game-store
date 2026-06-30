@@ -36,6 +36,8 @@ export class Breadcrumb {
   private activatedRoute = inject(ActivatedRoute);
    languageService = inject(LanguageService);
 
+
+   
   private rawBreadcrumbs = toSignal(
     this.router.events.pipe(
       filter((e) => e instanceof NavigationEnd),

@@ -2,10 +2,10 @@
 
 <div class="container py-4">
 
-  <!-- ── Section heading ──────────────────────────────── -->
+  <!--  Section heading  -->
   <h2 class="section-title mb-4">{{ t.Catalog }}</h2>
 
-  <!-- ══ 3 CATEGORY TILES (Day 1 landing) ══════════════ -->
+  <!--  3 CATEGORY TILES (Day 1 landing)  -->
   <div class="row g-3 mb-4">
     <div class="col-12 col-md-4" *ngFor="let cat of categories">
       <div class="cat-tile" [class.active]="selectedGroup === cat.key" (click)="setGroup(cat.key)">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <!-- ── Filter + Sort bar ──────────────────────────────── -->
+  <!--  Filter + Sort bar  -->
   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
     <!-- Group pills -->
     <div class="btn-group btn-group-sm" role="group">
@@ -54,9 +54,9 @@
     </div>
   </div>
   <button class="btn btn-sm btn-outline-danger" (click)="downloadPDF()">
-    📄 {{ lang === 'sr' ? 'Preuzmi PDF' : 'Download PDF' }}
+     {{ lang === 'sr' ? 'Preuzmi PDF' : 'Download PDF' }}
   </button>
-  <!-- ── Search bar ─────────────────────────────────────── -->
+  <!--  Search bar  -->
   <div class="mb-4">
     <input
       class="form-control"
@@ -65,10 +65,10 @@
       [placeholder]="t.Search">
   </div>
 
-  <!-- ── Results count ──────────────────────────────────── -->
+  <!--  Results count  -->
   <p class="text-muted small mb-3">{{ displayedGames.length }} {{ t.Games }}</p>
 
-  <!-- ══ GAME GRID ═══════════════════════════════════════ -->
+  <!--  GAME GRID  -->
   <div class="row g-3">
     <div class="col-6 col-md-4 col-lg-3" *ngFor="let g of displayedGames">
       <div class="card h-100" style="border-radius: 12px; overflow: hidden;">
