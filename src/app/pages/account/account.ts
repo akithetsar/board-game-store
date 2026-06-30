@@ -18,6 +18,7 @@ export class Account {
 
   loggedUser: User | null = null;
   cart: Cart = new Cart();
+  cartWithoutDuplicates: GameModel[] = [];
   orders: Order[] = [];
   private languageService = inject(LanguageService);
 
@@ -68,7 +69,10 @@ export class Account {
     this.cart = this.loggedUser?.cart ?? new Cart();
     console.log('Cart items:', this.cart.items);
     this.orders = this.loggedUser?.orders ?? [];
+    this.cartWithoutDuplicates = [...new Map(this.cart.items.map(item => [item.id, item])).values()];
   }
+
+
 
   getQuantity(item: GameModel): number {
     return this.cart.items.filter((i) => i.id === item.id).length;
@@ -100,6 +104,8 @@ export class Account {
         break;
       }
     }
+
+    this.cartWithoutDuplicates = [...new Map(this.loggedUser.cart.items.map(item => [item.id, item])).values()];
     localStorage.setItem('registeredUsers', JSON.stringify(regisretedUsers));
     localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
   }

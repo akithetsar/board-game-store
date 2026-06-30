@@ -16,7 +16,7 @@
   @if (cart.items.length > 0) {
 
   <ul class="list-group">
-    @for (item of cart.items; track item.id) {
+    @for (item of cartWithoutDuplicates; track item.id) {
     <li class="list-group-item">
       <div class="d-flex justify-content-between">
 
@@ -26,6 +26,10 @@
 
         <span>
           {{ item.price }} RSD
+        </span>
+
+        <span>
+          {{ getQuantity(item) }} 
         </span>
         
         <button class="btn btn-sm btn-danger" (click)="removeFromCart(item)">
